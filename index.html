@@ -52,11 +52,27 @@
 
 <body>
 <!-- Home -->
-<div data-role="page" id="page1">
+<div data-role="page" id="home">
     <div data-theme="d" data-role="header">
-        <a data-role="button" data-theme="b" href="#page1" class="ui-btn-right">
-            Login
-        </a>
+        
+		<a href="#popupLogin" data-rel="popup" class="ui-btn-right" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-transition="flip">Sign in</a>
+
+				<div data-role="popup" id="popupMenu" data-theme="a">
+					<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+						<form>
+							<div style="padding:10px 20px;">
+							  <h3>Please sign in</h3>
+					          <label for="un" class="ui-hidden-accessible">Username:</label>
+					          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
+
+					          <label for="pw" class="ui-hidden-accessible">Password:</label>
+					          <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
+
+					    	  <button type="submit" data-theme="b" data-icon="check">Sign in</button>
+							</div>
+						</form>
+					</div>
+				</div>
         <h3>
             NCI Support App
         </h3>
@@ -84,10 +100,10 @@
                 </a>
             </div>
         </div>
-        <a data-role="button" data-rel="back" data-theme="b" href="#page1">
+        <a data-role="button" data-theme="b" href="#about">
             About
         </a>
-        <a data-role="button" data-rel="back" data-theme="b" href="#page1">
+        <a data-role="button" data-theme="b" href="#contact">
             Contact
         </a>
     </div>
@@ -98,6 +114,110 @@
     </div>
 </div>
 
+<!-- Start of second page -->
+<div data-role="page" id="about">
+
+	<div data-role="header">
+		<h1>About</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eros neque, condimentum vitae ornare vel, semper et justo. Integer semper magna nec tellus blandit vitae hendrerit ipsum interdum. Cras quis tempus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis luctus euismod nibh et pulvinar. Etiam id nunc velit. Donec in porttitor massa. Aenean mattis purus id turpis dapibus volutpat interdum mi rhoncus. Duis euismod elit eget enim tincidunt blandit.</p>
+
+<p>Quisque at posuere magna. Suspendisse eu erat felis, porta imperdiet sapien. Donec aliquet dictum massa, sed cursus mauris lacinia consequat. Mauris dignissim ligula at enim egestas non suscipit est interdum. Etiam pretium congue risus, nec pellentesque nulla accumsan ac. Curabitur magna arcu, venenatis vitae venenatis et, porttitor nec justo. Aenean et neque sit amet ipsum tincidunt lacinia. Sed convallis velit non nisl hendrerit eu vestibulum elit pulvinar.</p>
+
+<p>Nulla posuere sollicitudin mauris, id dapibus magna tincidunt blandit. Pellentesque ac erat justo. Sed mi magna, placerat eleifend rutrum ut, posuere ultrices ligula. Sed vitae lectus at nibh sagittis scelerisque sit amet in felis. Nam ut metus et velit dapibus porttitor id in tortor. Nullam non mauris quam. Suspendisse fermentum libero vel mauris lacinia vel malesuada enim ultricies. In hac habitasse platea dictumst. Pellentesque sit amet eros ac nibh sagittis imperdiet sit amet vehicula nisl. Vestibulum consequat justo quis libero feugiat vehicula. Mauris posuere ligula et lacus tristique sollicitudin. Morbi sodales posuere posuere. Aliquam massa tortor, porttitor in consequat in, congue dictum tellus.</p>		
+		<p><a href="#home">Home</a></p>	
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="contact">
+
+	<div data-role="header">
+		<h1>About</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+	<form action="http://samcogan.me/nci_app/contact.php" method="POST">
+            <div data-role="fieldcontain">
+                <label for="name">
+                    Name*
+                </label>
+                <input name="name" id="name" placeholder="Insert name" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="snum">
+                    Student Num*
+                </label>
+                <input name="snum" id="snum" placeholder="Insert name" value="" type="text">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="phone">
+                    Phone*
+                </label>
+                <input name="phone" id="phone" placeholder="Mobile number" value="" type="tel">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="detail">
+                    Details
+                </label>
+                <textarea name="Details" id="detail" placeholder="Please detail your query"></textarea>
+            </div>
+            <input id="submit" type="submit" data-inline="true" data-theme="b" data-icon="check"
+            data-iconpos="left" value="Submit">
+        </form>	
+		<p><a href="#home">Home</a></p>	
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<script>
+$(document).one("pagebeforechange", function() {
+
+    // animation speed;
+    var animationSpeed = 200;
+
+    function animateCollapsibleSet(elm) {
+
+        // can attach events only one time, otherwise we create infinity loop;
+        elm.one("expand", function() {
+
+            // hide the other collapsibles first;
+            $(this).parent().find(".ui-collapsible-content").not(".ui-collapsible-content-collapsed").trigger("collapse");
+
+            // animate show on collapsible;
+            $(this).find(".ui-collapsible-content").slideDown(animationSpeed, function() {
+
+                // trigger original event and attach the animation again;
+                animateCollapsibleSet($(this).parent().trigger("expand"));
+            });
+
+            // we do our own call to the original event;
+            return false;
+        }).one("collapse", function() {
+
+            // animate hide on collapsible;
+            $(this).find(".ui-collapsible-content").slideUp(animationSpeed, function() {
+
+                // trigger original event;
+                $(this).parent().trigger("collapse");
+            });
+
+            // we do our own call to the original event;
+            return false;
+        });
+    }
+
+    // init;
+    animateCollapsibleSet($("[data-role='collapsible-set'] > [data-role='collapsible']"));
+});
+</script>
 
 </body>
 
