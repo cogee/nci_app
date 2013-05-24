@@ -142,24 +142,30 @@
 	</div><!-- /header -->
 
 	<div data-role="content" id="contact_content">	
-	<form action="http://samcogan.me/nci_app/contact.php" method="POST">
+	<form method="POST">
+	<label for="name" id="name_label">Name</label>
+      <!--
+      
+      
+      
+      
+      -->
             <div data-role="fieldcontain">
                 <label for="name">
                     Name*
                 </label>
-                <input name="name" id="name" placeholder="Insert name" value="" type="text">
+                <input type="text" name="name" id="name" size="30" value="" class="text-input" />
+				<label class="error" for="name" id="name_error">This field is required.</label>
             </div>
             <div data-role="fieldcontain">
-                <label for="snum">
-                    Student Num*
-                </label>
-                <input name="snum" id="snum" placeholder="Insert name" value="" type="text">
+               <label for="email" id="email_label">Return Email</label>
+      <input type="text" name="email" id="email" size="30" value="" class="text-input" />
+      <label class="error" for="email" id="email_error">This field is required.</label>
             </div>
             <div data-role="fieldcontain">
-                <label for="phone">
-                    Phone*
-                </label>
-                <input name="phone" id="phone" placeholder="Mobile number" value="" type="tel">
+                <label for="phone" id="phone_label">Return Phone</label>
+      <input type="text" name="phone" id="phone" size="30" value="" class="text-input" />
+      <label class="error" for="phone" id="phone_error">This field is required.</label>
             </div>
             <div data-role="fieldcontain">
                 <label for="detail">
@@ -167,7 +173,7 @@
                 </label>
                 <textarea name="Details" id="detail" placeholder="Please detail your query"></textarea>
             </div>
-            <input id="submit" type="submit" data-inline="true" data-theme="b" data-icon="check"
+            <input id="submit" type="submit" class="button" data-inline="true" data-theme="b" data-icon="check"
             data-iconpos="left" value="Submit">
         </form>	
 		<p><a href="#home">Home</a></p>	
@@ -218,12 +224,52 @@ $(document).one("pagebeforechange", function() {
     animateCollapsibleSet($("[data-role='collapsible-set'] > [data-role='collapsible']"));
 });
 
-var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
+
+
+
+
+
+
+$(function() {
+  $('.error').hide();
+  $('input.text-input').css({backgroundColor:"#FFFFFF"});
+  $('input.text-input').focus(function(){
+    $(this).css({backgroundColor:"#FFDDAA"});
+  });
+  $('input.text-input').blur(function(){
+    $(this).css({backgroundColor:"#FFFFFF"});
+  });
+
+  $(".button").click(function() {
+		// validate and process form
+		// first hide any error messages
+    $('.error').hide();
+		
+	  var name = $("input#name").val();
+		if (name == "") {
+      $("label#name_error").show();
+      $("input#name").focus();
+      return false;
+    }
+		var email = $("input#email").val();
+		if (email == "") {
+      $("label#email_error").show();
+      $("input#email").focus();
+      return false;
+    }
+		var phone = $("input#phone").val();
+		if (phone == "") {
+      $("label#phone_error").show();
+      $("input#phone").focus();
+      return false;
+    }
+		
+		var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
 		//alert (dataString);return false;
 		
 		$.ajax({
       type: "POST",
-      url: "http://samcogan.me/contact.php",
+      url: "http://samcogan.me/nci_app/process.php",
       data: dataString,
       success: function() {
         $('#contact_content').html("<div id='message'></div>");
@@ -231,7 +277,7 @@ var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
         .append("<p>We will be in touch soon.</p>")
         .hide()
         .fadeIn(1500, function() {
-          $('#message').append("Woop");
+          $('#message').append("<img id='checkmark' src='images/check.png' />");
         });
       }
      });
@@ -241,6 +287,7 @@ var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
 runOnLoad(function(){
   $("input#name").select().focus();
 });
+
 </script>
 
 </body>
