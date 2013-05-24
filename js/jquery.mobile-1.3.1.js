@@ -4125,7 +4125,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 	$.mobile.dialogHashKey = dialogHashKey;
 
 	//enable cross-domain page support
-	$.mobile.allowCrossDomainPages = false;
+	$.mobile.allowCrossDomainPages = true;
 
 	$.mobile._bindPageRemove = function() {
 		var page = $( this );
