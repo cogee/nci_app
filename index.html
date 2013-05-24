@@ -141,7 +141,7 @@
 		<h1>About</h1>
 	</div><!-- /header -->
 
-	<div data-role="content">	
+	<div data-role="content" id="contact_content">	
 	<form action="http://samcogan.me/nci_app/contact.php" method="POST">
             <div data-role="fieldcontain">
                 <label for="name">
@@ -216,6 +216,30 @@ $(document).one("pagebeforechange", function() {
 
     // init;
     animateCollapsibleSet($("[data-role='collapsible-set'] > [data-role='collapsible']"));
+});
+
+var dataString = 'name='+ name + '&email=' + email + '&phone=' + phone;
+		//alert (dataString);return false;
+		
+		$.ajax({
+      type: "POST",
+      url: "http://samcogan.me/contact.php",
+      data: dataString,
+      success: function() {
+        $('#contact_content').html("<div id='message'></div>");
+        $('#message').html("<h2>Contact Form Submitted!</h2>")
+        .append("<p>We will be in touch soon.</p>")
+        .hide()
+        .fadeIn(1500, function() {
+          $('#message').append("Woop");
+        });
+      }
+     });
+    return false;
+	});
+});
+runOnLoad(function(){
+  $("input#name").select().focus();
 });
 </script>
 
