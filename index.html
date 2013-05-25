@@ -51,6 +51,7 @@
 
 
 <body>
+<!--
 <script>
 $("#contact").submit(function(e){
   e.preventDefault();
@@ -138,7 +139,7 @@ $("#contact").submit(function(e){
     </div>
     <div data-theme="d" data-role="footer" data-position="fixed">
         <h3>
-            Footer
+            &copy; National College of Ireland 2013
         </h3>
     </div>
 </div>
@@ -146,8 +147,12 @@ $("#contact").submit(function(e){
 <!-- Start of second page -->
 <div data-role="page" id="about">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="d">
 		<h1>About</h1>
+		<a data-role="button" href="#home" data-icon="arrow-l" data-iconpos="left"
+        class="ui-btn-right" data-theme="b">
+            Back
+        </a>
 	</div><!-- /header -->
 
 	<div data-role="content">	
@@ -156,18 +161,22 @@ $("#contact").submit(function(e){
 <p>Quisque at posuere magna. Suspendisse eu erat felis, porta imperdiet sapien. Donec aliquet dictum massa, sed cursus mauris lacinia consequat. Mauris dignissim ligula at enim egestas non suscipit est interdum. Etiam pretium congue risus, nec pellentesque nulla accumsan ac. Curabitur magna arcu, venenatis vitae venenatis et, porttitor nec justo. Aenean et neque sit amet ipsum tincidunt lacinia. Sed convallis velit non nisl hendrerit eu vestibulum elit pulvinar.</p>
 
 <p>Nulla posuere sollicitudin mauris, id dapibus magna tincidunt blandit. Pellentesque ac erat justo. Sed mi magna, placerat eleifend rutrum ut, posuere ultrices ligula. Sed vitae lectus at nibh sagittis scelerisque sit amet in felis. Nam ut metus et velit dapibus porttitor id in tortor. Nullam non mauris quam. Suspendisse fermentum libero vel mauris lacinia vel malesuada enim ultricies. In hac habitasse platea dictumst. Pellentesque sit amet eros ac nibh sagittis imperdiet sit amet vehicula nisl. Vestibulum consequat justo quis libero feugiat vehicula. Mauris posuere ligula et lacus tristique sollicitudin. Morbi sodales posuere posuere. Aliquam massa tortor, porttitor in consequat in, congue dictum tellus.</p>		
-		<p><a href="#home">Home</a></p>	
+		
 	</div><!-- /content -->
 
-	<div data-role="footer">
-		<h4>Page Footer</h4>
+	<div data-theme="d" data-role="footer" data-position="fixed">
+		<h4>&copy; National College of Ireland 2013</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
 
 <div data-role="page" id="contact">
 
-	<div data-role="header">
-		<h1>About</h1>
+	<div data-role="header" data-theme="d">
+		<h1>Contact</h1>
+		<a data-role="button" href="#home" data-icon="arrow-l" data-iconpos="left"
+        class="ui-btn-right" data-theme="b">
+            Back
+        </a>
 	</div><!-- /header -->
 
 	<div data-role="content" id="contact_content">	
@@ -175,51 +184,22 @@ $("#contact").submit(function(e){
 <form id="contact" method="post">
   <fieldset>
     <label>Your Name</label><br />
-    <input name="name" id="name" type="text">  
+    <input name="name" id="name" type="text" required>  
     <label>Your Email</label><br />
-    <input name="email" id="email" type="text">  
-    <label>Your Question</label><br />
+    <input name="email" id="email" type="email" required>  
+    <label>Your Message</label><br />
     <textarea rows="10" name="text" id="text" ></textarea>
   </fieldset>
   <input type="submit" value="Send Message" name="submit">
   <p class="success" style="display:none">Your message has been sent successfully.</p>
-  <p class="error" style="display:none">E-mail must be valid and message must be longer than 100 characters.</p>
+  <p class="error" style="display:none">E-mail must be valid and message must be longer than 20 characters.</p>
 </form>
-<!--	
-<form id ="contact" method="POST">
-	<label for="name" id="name_label">Name</label>
-   
-            <div data-role="fieldcontain">
-                <label for="name">
-                    Name*
-                </label>
-                <input type="text" name="name" id="name" size="30" value="" class="text-input" />
-				<label class="error" for="name" id="name_error">This field is required.</label>
-            </div>
-            <div data-role="fieldcontain">
-               <label for="email" id="email_label">Return Email</label>
-      <input type="text" name="email" id="email" size="30" value="" class="text-input" />
-      <label class="error" for="email" id="email_error">This field is required.</label>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="phone" id="phone_label">Return Phone</label>
-      <input type="text" name="phone" id="phone" size="30" value="" class="text-input" />
-      <label class="error" for="phone" id="phone_error">This field is required.</label>
-            </div>
-            <div data-role="fieldcontain">
-                <label for="detail">
-                    Details
-                </label>
-                <textarea name="text" id="text" placeholder="Please detail your query"></textarea>
-            </div>
-            <input id="submit" type="submit" class="button" data-inline="true" data-theme="b" data-icon="check"
-            data-iconpos="left" value="Submit">
-        </form>	-->
-		<p><a href="#home">Home</a></p>	
+
+			
 	</div><!-- /content -->
 
-	<div data-role="footer">
-		<h4>Page Footer</h4>
+	<div data-theme="d" data-role="footer" data-position="fixed">
+		<h4>&copy; National College of Ireland 2013</h4>
 	</div><!-- /footer -->
 </div><!-- /page -->
 <script>
@@ -280,7 +260,7 @@ $("#contact").submit(function(e){
     return pattern.test(emailAddress);
   };
  
-  if (isValidEmail(email) && (text.length > 100) && (name.length > 1)){
+  if (isValidEmail(email) && (text.length > 20) && (name.length > 1)){
     $.ajax({
     type: "POST",
     url: "email.php",
